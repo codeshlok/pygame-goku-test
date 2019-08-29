@@ -9,8 +9,9 @@ finished = False
 # Goku Images
 KeyPressed = pygame.key.get_pressed()
 Goku = 0
-gokuIdle = [pygame.image.load("Goku/0.png"), pygame.image.load("Goku/1.png"), pygame.image.load("Goku/2.png")]
-gokuBlast = [pygame.image.load("Goku/63.png"),pygame.image.load("Goku/64.png"), pygame.image.load("Goku/65.png"), pygame.image.load("Goku/66.png")]
+
+uiIdle = [pygame.image.load("UIGoku/262.png"),pygame.image.load("UIGoku/263.png")]
+uiPunch = [pygame.image.load("UIGoku/277.png"),pygame.image.load("UIGoku/278.png")]
 left = False
 right = False
 idleCount = 0
@@ -25,12 +26,23 @@ while finished == False:
             finished = True
 
     screen.fill(white)
+    KeyPressed = pygame.key.get_pressed()
+
+    if KeyPressed[pygame.K_SPACE] == 1:
+        gStance = 2
 
     if gStance == 1:
-        Goku = gokuIdle
-        if gCounter < 2:
-            gCounter = gCounter + 1
-    print(f"{gCounter}")
+        Goku = uiIdle
+        gCounter = gCounter + 1
+        if gCounter > 1:
+            gCounter = 0
+
+    if gStance == 2:
+        Goku = uiPunch
+        gCounter = gCounter + 1
+        if gCounter > 1:
+            gCounter = 0
+
     screen.blit(Goku[gCounter], (450, 358))
     pygame.display.flip()
     frame.tick(12)
